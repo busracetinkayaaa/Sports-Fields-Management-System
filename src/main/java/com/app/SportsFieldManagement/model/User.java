@@ -17,4 +17,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     private String role;
+
+    @OneToOne(mappedBy = "user")
+    private Client client;
 }

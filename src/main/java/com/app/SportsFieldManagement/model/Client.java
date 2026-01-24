@@ -21,6 +21,10 @@ public class Client {
     @Column(nullable = false)
     private String email;
 
+    @OneToOne
+    @JoinColumn(name="user_id",unique = true)
+    private User user;
+
     @OneToMany(mappedBy="client")
-    private List<Reservation> reservation=new ArrayList<>();
+    private List<Reservation> reservations=new ArrayList<>();
 }
