@@ -24,6 +24,7 @@ public class SportField {
     private BigDecimal price;
 
     @OneToMany(mappedBy = "field",fetch = FetchType.LAZY)
+    @Builder.Default
     private List<Reservation> reservation=new ArrayList<>();
 
 }
