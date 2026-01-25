@@ -18,7 +18,7 @@ public class SportField {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private enum FieldType{SOCCER,BASKETBALL,TENNIS};
+    public enum FieldType{SOCCER,BASKETBALL,TENNIS};
     private FieldType sportType;
     private boolean isIndoor;
     private BigDecimal price;
