@@ -1,9 +1,8 @@
 package com.app.SportsFieldManagement.mapper;
 
-import com.app.SportsFieldManagement.dto.RegisterRequest;
-import com.app.SportsFieldManagement.dto.UserResponse;
+import com.app.SportsFieldManagement.dto.request.RegisterRequest;
+import com.app.SportsFieldManagement.dto.response.UserResponse;
 import com.app.SportsFieldManagement.model.User;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
