@@ -1,4 +1,4 @@
-package com.app.SportsFieldManagement.dto;
+package com.app.SportsFieldManagement.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 
