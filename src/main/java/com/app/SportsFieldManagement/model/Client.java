@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter @Setter
 @Entity
+@Builder
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +22,11 @@ public class Client {
     @Column(nullable = false)
     private String email;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id",unique = true)
     private User user;
 
-    @OneToMany(mappedBy="client")
+    @OneToMany(mappedBy="client",fetch = FetchType.LAZY)
+    @Builder.Default
     private List<Reservation> reservations=new ArrayList<>();
 }
