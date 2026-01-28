@@ -1,18 +1,12 @@
 package com.app.SportsFieldManagement.controller;
 
-import com.app.SportsFieldManagement.dto.LoginRequest;
-import com.app.SportsFieldManagement.dto.LoginResponse;
-import com.app.SportsFieldManagement.dto.RegisterRequest;
-import com.app.SportsFieldManagement.model.User;
+import com.app.SportsFieldManagement.dto.request.LoginRequest;
+import com.app.SportsFieldManagement.dto.response.LoginResponse;
+import com.app.SportsFieldManagement.dto.request.RegisterRequest;
 import com.app.SportsFieldManagement.service.AuthService;
-import com.app.SportsFieldManagement.service.TokenService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
