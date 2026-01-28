@@ -13,8 +13,8 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation,Long> {
     List<Reservation> findAll();
-    @Query("SELECT r FROM Reservation r WHERE r.field=:field AND DATE(r.startHour)=:date")
-    List<Reservation> findByFieldAndDate(SportField field, LocalDate date);
+    @Query("SELECT r FROM Reservation r WHERE r.field.id=:fieldId AND DATE(r.startHour)=:date")
+    List<Reservation> findByFieldIdAndDate(@Param("fieldId") Long fieldId,@Param("date")LocalDate date);
     @Query("SELECT case when count(r)>0 then true else false end FROM Reservation r WHERE r.field= :field AND r.endHour>:startHour AND r.startHour<:endHour")
     boolean existsConflictingReservations(@Param("field")SportField field,
                                                   @Param("startHour") LocalDateTime startHour, @Param("endHour") LocalDateTime endHour);

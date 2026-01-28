@@ -56,8 +56,8 @@ public class ReservationService {
         return reservationRepository.findByClientName(name).stream()
                 .map(reservationMapper::toResponse).toList();
     }
-    public List<ReservationResponse> getReservationsByFieldAndDate(SportField field, LocalDate date){
-        return reservationRepository.findByFieldAndDate(field,date).stream()
+    public List<ReservationResponse> getReservationsByFieldAndDate(Long fieldId, LocalDate date){
+        return reservationRepository.findByFieldIdAndDate(fieldId,date).stream()
                 .map(reservationMapper::toResponse).toList();
     }
     public List<ReservationResponse> getAllReservations(){
