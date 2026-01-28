@@ -1,5 +1,8 @@
 package com.app.SportsFieldManagement.service;
 
+import com.app.SportsFieldManagement.dto.request.SportFieldRequest;
+import com.app.SportsFieldManagement.dto.response.SportFieldResponse;
+import com.app.SportsFieldManagement.mapper.SportFieldMapper;
 import com.app.SportsFieldManagement.model.SportField;
 import com.app.SportsFieldManagement.repository.SportFieldRepository;
 import jakarta.transaction.Transactional;
@@ -15,9 +18,18 @@ import java.util.List;
 @Slf4j
 public class SportFieldService {
     private final SportFieldRepository sportFieldRepository;
-    public SportField addField(SportField sportField){
-        log.info("Adding new field:{}",sportField.getName());
-        return sportFieldRepository.save(sportField);
+    private final SportFieldMapper sportFieldMapper;
+    public SportFieldResponse addField(SportFieldRequest request){
+        SportField field=new SportField();
+        field.setName(request.name());
+        field.setSportType(request.sportType());
+        field.setPrice(request.price());
+        field.setIndoor(request.indoor());
+
+        log.info("Adding new field:{}",request.name());
+        SportField savedField = sportFieldRepository.save(field);
+
+        return sportFieldMapper.toResponse(savedField);
     }
     public List<SportField> getAllFields(){
         return sportFieldRepository.findAll();
