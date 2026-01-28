@@ -27,11 +27,11 @@ public class SportFieldController {
     public ResponseEntity<SportFieldResponse> getFieldById(@PathVariable Long id){
         return ResponseEntity.ok(sportFieldService.getFieldById(id));
     }
-    @PutMapping("/id}")
+    @PutMapping("/{id}")
     public ResponseEntity<SportFieldResponse> editField(@PathVariable Long id,@RequestBody SportFieldRequest request){
         return ResponseEntity.ok(sportFieldService.editField(id,request));
     }
-    @DeleteMapping("/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteField(@PathVariable Long id){
         sportFieldService.deleteField(id);
         return ResponseEntity.noContent().build();
