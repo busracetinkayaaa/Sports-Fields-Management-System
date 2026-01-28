@@ -31,21 +31,25 @@ public class SportFieldService {
 
         return sportFieldMapper.toResponse(savedField);
     }
-    public List<SportField> getAllFields(){
-        return sportFieldRepository.findAll();
+    public List<SportFieldResponse> getAllFields(){
+        return sportFieldRepository.findAll()
+                .stream().map(sportFieldMapper::toResponse).toList();
     }
-    public SportField getFieldById(Long id){
-        return sportFieldRepository.findById(id).orElseThrow(()-> new RuntimeException("Field not found. ID:"+id));
+    public SportFieldResponse getFieldById(Long id){
+        return sportFieldRepository.findById(id).map(sportFieldMapper::toResponse)
+                .orElseThrow(()-> new RuntimeException("Field not found. ID:"+id));
     }
     @Transactional
-    public SportField editField(Long id,SportField field){
+    public SportFieldResponse editField(Long id,SportFieldRequest request){
         log.info("Updating field ID:{} ",id);
-        SportField existing_field = getFieldById(id);
-        existing_field.setName(field.getName());
-        existing_field.setPrice(field.getPrice());
-        existing_field.setSportType(field.getSportType());
+        SportField existing_field = sportFieldRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("Sport field not found"));
+        existing_field.setName(request.name());
+        existing_field.setPrice(request.price());
+        existing_field.setSportType(request.sportType());
+        existing_field.setIndoor(request.indoor());
 
-        return existing_field;
+        return sportFieldMapper.toResponse(sportFieldRepository.save(existing_field));
     }
     public void deleteField(Long id){
         if(!sportFieldRepository.existsById(id)){
