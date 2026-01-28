@@ -15,10 +15,10 @@ public interface ReservationRepository extends JpaRepository<Reservation,Long> {
     List<Reservation> findAll();
     @Query("SELECT r FROM Reservation r WHERE r.field=:field AND DATE(r.startHour)=:date")
     List<Reservation> findByFieldAndDate(SportField field, LocalDate date);
-    @Query("SELECT r FROM Reservation r WHERE r.field= :field AND r.endHour>:start AND r.startHour<:end")
-    boolean findConflictingReservations(@Param("field")SportField field,
+    @Query("SELECT case when count(r)>0 then true else false end FROM Reservation r WHERE r.field= :field AND r.endHour>:startHour AND r.startHour<:endHour")
+    boolean existsConflictingReservations(@Param("field")SportField field,
                                                   @Param("startHour") LocalDateTime startHour, @Param("endHour") LocalDateTime endHour);
-   List<Reservation> findByField(SportField field);
-   List<Reservation>findByClient(Client client);
+   List<Reservation> findByFieldId(Long fieldId);
+   List<Reservation>findByClientName(String name);
 
 }
