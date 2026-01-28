@@ -25,6 +25,8 @@ public class SportFieldService {
         field.setSportType(request.sportType());
         field.setPrice(request.price());
         field.setIndoor(request.indoor());
+        field.setLatitude(request.latitude());
+        field.setLongitude(request.longitude());
 
         log.info("Adding new field:{}",request.name());
         SportField savedField = sportFieldRepository.save(field);

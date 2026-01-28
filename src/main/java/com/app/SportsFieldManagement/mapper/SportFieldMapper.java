@@ -10,6 +10,8 @@ public class SportFieldMapper {
         return new SportFieldResponse(sportField.getId(),sportField.getName(),
                 sportField.getSportType(),
                 sportField.getPrice(),
-                sportField.isIndoor());
+                sportField.isIndoor(),
+                sportField.getLatitude(),
+                sportField.getLongitude());
     }
 }

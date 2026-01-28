@@ -21,6 +21,8 @@ public class SportField {
     public enum FieldType{SOCCER,BASKETBALL,TENNIS};
     private FieldType sportType;
     private boolean isIndoor;
+    private double latitude;
+    private double longitude;
     private BigDecimal price;
 
     @OneToMany(mappedBy = "field",fetch = FetchType.LAZY)

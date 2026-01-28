@@ -8,5 +8,5 @@ import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 public record SportFieldRequest(@NotBlank String name, @NotNull SportField.FieldType sportType,
-                                @Positive BigDecimal price, boolean indoor) {
-}
+                                @Positive BigDecimal price, boolean indoor,
+                                double latitude, double longitude) { }
