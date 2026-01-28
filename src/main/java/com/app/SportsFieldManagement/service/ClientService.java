@@ -42,7 +42,7 @@ public class ClientService {
         log.info("Updating client profile. ID {}",clientId);
         return clientMapper.toResponse(clientRepository.save(existing));
     }
-    List<ClientResponse> getAllClients(){
+    public List<ClientResponse> getAllClients(){
         return clientRepository.findAll()
                 .stream().map(clientMapper::toResponse).toList();
     }
