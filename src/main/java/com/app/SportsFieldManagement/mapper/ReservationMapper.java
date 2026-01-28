@@ -9,6 +9,7 @@ public class ReservationMapper {
     public ReservationResponse toResponse(Reservation reservation){
         return new ReservationResponse(
                 reservation.getId(),
+                reservation.getClient().getId(),
                 reservation.getField().getName(),
                 reservation.getField().getSportType().name(),
                 reservation.getStartHour(),
