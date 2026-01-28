@@ -25,12 +25,20 @@ public class ReservationService {
     private final ClientRepository clientRepository;
     private final SportFieldRepository sportFieldRepository;
     private final ReservationMapper reservationMapper;
+    private final WeatherService weatherService;
     @Transactional
     public ReservationResponse createReservation(ReservationRequest request ){
         log.info("Admin is creating a reservation for fieldId={}, start={}, end={}",
                 request.fieldId(), request.startHour(), request.endHour());
         SportField field= sportFieldRepository.findById(request.fieldId()).orElseThrow(()->new RuntimeException("Field not found"));
         Client client=clientRepository.findById(request.clientId()).orElseThrow(()-> new RuntimeException("Client not found"));
+
+        if(!field.isIndoor()){
+            boolean suitableTemp= weatherService.isWeatherSuitableForOutdoor(field.getLatitude(),field.getLongitude());
+            if(!suitableTemp){
+                throw new IllegalStateException("Outdoor fields can only be reserved if temperature is above 10°C");
+            }
+        }
 
         boolean conflict=reservationRepository.existsConflictingReservations(field,request.startHour(),request.endHour());
         if(conflict){
